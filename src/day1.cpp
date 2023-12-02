@@ -31,7 +31,7 @@ void DayOne::part1()
         }
         sum += fdigit*10 + ldigit;
     }
-    std::cout << "The sum is: " << sum << std::endl;
+    //std::cout << "The sum is: " << sum << std::endl;
 }
 
 void DayOne::part2()
@@ -62,5 +62,5 @@ void DayOne::part2()
         }
         sum += fdigit*10 + ldigit;
     }
-    std::cout << "The sum is: " << sum << std::endl;
+    //std::cout << "The sum is: " << sum << std::endl;
 }
