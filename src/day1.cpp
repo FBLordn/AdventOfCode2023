@@ -1,11 +1,7 @@
 #include "../inc/day1.hpp"
 #include "../inc/macros.hpp"
 
-#include <fstream>
-#include <iostream>
 #include <string>
-#include <filesystem>
-
 
 void DayOne::part1()
 {
@@ -18,8 +14,8 @@ void DayOne::part1()
         int ldigit = -1;
         for(int i=0;i<line.length();i++)
         {
-            int f = (int)line.at(i) - 48;
-            int l = (int)line.at(line.length()-1-i) - 48;
+            int f = (int)line[i] - 48;
+            int l = (int)line[line.length()-1-i] - 48;
             if(f <= 9 && fdigit == -1)
             {
                 fdigit = f;
