@@ -5,7 +5,7 @@
 
 void DayOne::part1()
 {
-    OPEN("data.txt");
+    OPEN("test.txt");
     int sum = 0;
     std::string line;
     while(getline(file, line))
@@ -31,7 +31,7 @@ void DayOne::part1()
         }
         sum += fdigit*10 + ldigit;
     }
-    //std::cout << "The sum is: " << sum << std::endl;
+    std::cout << "The sum is: " << sum << std::endl;
 }
 
 void DayOne::part2()
@@ -39,7 +39,7 @@ void DayOne::part2()
     int sum = 0;
     std::string line;
     std::string numbers[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
-    OPEN("data.txt");
+    OPEN("test.txt");
     while(getline(file, line))
     {
         int fdigit = 0;
@@ -62,5 +62,5 @@ void DayOne::part2()
         }
         sum += fdigit*10 + ldigit;
     }
-    //std::cout << "The sum is: " << sum << std::endl;
+    std::cout << "The sum is: " << sum << std::endl;
 }
