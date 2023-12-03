@@ -6,8 +6,8 @@
 namespace DayThree{
     void part1();
     void part2();
-    int getNumber(std::string line, int index);
     int checkLine(std::string line, int index);
+    int getMiddleNumber(std::string line, int index);
 }
 
 #endif
