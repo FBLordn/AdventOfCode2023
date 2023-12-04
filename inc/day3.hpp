@@ -3,7 +3,8 @@
 
 #include <string>
 
-namespace DayThree{
+namespace DayThree
+{
     void part1();
     void part2();
     int checkLine(std::string line, int index);

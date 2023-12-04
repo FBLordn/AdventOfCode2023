@@ -1,7 +1,8 @@
 #ifndef DAY2_H
 #define DAY2_H
 
-namespace DayTwo {
+namespace DayTwo
+{
     void part1();
     void part2();
 }
