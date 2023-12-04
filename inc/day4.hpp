@@ -7,7 +7,6 @@ namespace DayFour
 {
     void part1();
     void part2();
-    int* getNumbers(std::string line);
 }
 
 #endif

@@ -60,25 +60,6 @@ void DayFour::part1()
     std::cout << "The sum is: " << sum << std::endl;
 }
 
-int* DayFour::getNumbers(std::string line)
-{
-    int numbers[(line.find('|')-2)/3+1];
-    int temp = 0;
-    for(int i=1;line[i]!= '|';i++)
-    {
-        if(isdigit(line[i]))
-        {
-            temp = temp*10 + (int)line[i]-48;
-        }
-        else
-        {
-            numbers[(i-1)/3] = temp;
-        }
-    }
-    numbers[sizeof(numbers)/sizeof(*numbers)] = -1;
-    return numbers;
-}
-
 
 void DayFour::part2()
 {
@@ -87,22 +68,18 @@ void DayFour::part2()
         std::cout << "error";
         return;
     }
-    std::string input[std::count(std::istreambuf_iterator<char>(data), std::istreambuf_iterator<char>(), '\n')+1];
-    OPEN("data.txt");
-    std::string line;
-    for(int l=0; getline(file, line); l++)
-    {
-        input[l] = line;
-    }
-    int arrlength = sizeof(input)/sizeof(*input);
-    int wins[arrlength];
-    std::fill_n(wins, arrlength, -1);
+    int ticketCount = std::count(std::istreambuf_iterator<char>(data), std::istreambuf_iterator<char>(), '\n')+1;
+    int wins[ticketCount];
+    std::fill_n(wins, ticketCount, -1);
+    int sum = 0;
     std::queue<int> tickets;
-    for(int i=0; i<arrlength-1; i++)
+    for(int i=0; i<ticketCount-1; i++)
     {
+        sum++;
         tickets.push(i);
     }
-    int sum = arrlength-1;
+    OPEN("data.txt");
+    std::string line;
     while(!tickets.empty())
     {
         int x = tickets.front();
@@ -116,7 +93,7 @@ void DayFour::part2()
             }
             continue;
         }
-        std::string line = input[x]; 
+        getline(file,line);
         int win = 0;
         line = line.erase(0,line.find(':')+1);
         int winning[(line.find('|')-1)/3];
