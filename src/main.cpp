@@ -6,14 +6,14 @@
 
 int main()
 {
-    //std::chrono::time_point<std::chrono::high_resolution_clock> start;
-    //std::chrono::time_point<std::chrono::high_resolution_clock> end;
+    std::chrono::time_point<std::chrono::high_resolution_clock> start;
+    std::chrono::time_point<std::chrono::high_resolution_clock> end;
     //TIMER(DayOne::part1, start, end);
     //TIMER(DayOne::part2, start, end);
     //TIMER(DayTwo::part1, start, end);
     //TIMER(DayTwo::part2, start, end);
     //TIMER(DayThree::part1, start, end);
     //TIMER(DayThree::part2, start, end);
-    DayFour::part1();
-    DayFour::part2();
+    //TIMER(DayFour::part1, start, end);
+    //TIMER(DayFour::part2, start, end);
 }
