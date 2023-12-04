@@ -41,12 +41,12 @@ void DayFour::part2()
     std::vector<int> tickets;
     OPEN("data.txt");
     std::string line;
-    tickets.push_back(0);
+    tickets.push_back(1);
     for(int x=0; getline(file,line); x++)
     {
         if(tickets.size()-1 < x)
         {
-            tickets.push_back(0);
+            tickets.push_back(1);
         }
         int win = 0;
         line = line.erase(0,line.find(':')+1);
@@ -64,19 +64,12 @@ void DayFour::part2()
             }
         }
         wins.push_back(win);
+        sum += tickets[x];
         for(int i=1; i<=win; i++)
         {
             if(tickets.size()-1 < x+i){
-                tickets.push_back(0);
+                tickets.push_back(1);
             }
-            tickets[x+i]++;
-        }
-    }
-    for(int x=0;x<tickets.size();x++)
-    {
-        sum += tickets[x] + 1;
-        for(int i=1; i<=wins[x];i++)
-        {
             tickets[x+i] += tickets[x];
         }
     }
