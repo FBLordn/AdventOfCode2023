@@ -7,7 +7,7 @@ using namespace DayThree;
 
 void DayThree::part1()
 {
-    std::ifstream data ("data.txt");
+    std::ifstream data ("data/day3.txt");
     if(!data.is_open()){
         std::cout << "error";
         return;
@@ -15,7 +15,7 @@ void DayThree::part1()
     std::string input[std::count(std::istreambuf_iterator<char>(data), std::istreambuf_iterator<char>(), '\n')+3];
     std::string line;
     int sum = 0;
-    OPEN("data.txt")
+    OPEN("data/day3.txt")
     for(int l=1; getline(file, line); l++)
     {
         input[l] = "." + line + ".";
@@ -41,7 +41,7 @@ void DayThree::part1()
 
 void DayThree::part2()
 {
-    std::ifstream data ("data.txt");
+    std::ifstream data ("data/day3.txt");
     if(!data.is_open()){
         std::cout << "error";
         return;
@@ -49,7 +49,7 @@ void DayThree::part2()
     std::string input[std::count(std::istreambuf_iterator<char>(data), std::istreambuf_iterator<char>(), '\n')+3];
     std::string line;
     int sum = 0;
-    OPEN("data.txt")
+    OPEN("data/day3.txt")
     for(int l=1; getline(file, line); l++)
     {
         input[l] = "." + line + ".";

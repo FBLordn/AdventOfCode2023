@@ -8,7 +8,7 @@ using namespace DayFour;
 
 void DayFour::part1()
 {
-    OPEN("data.txt");
+    OPEN("data/day4.txt");
     std::string line;
     int sum = 0;
     while(getline(file, line))
@@ -39,7 +39,7 @@ void DayFour::part2()
     int sum = 0;
     std::vector<int> wins;
     std::vector<int> tickets;
-    OPEN("data.txt");
+    OPEN("data/day4.txt");
     std::string line;
     tickets.push_back(1);
     for(int x=0; getline(file,line); x++)

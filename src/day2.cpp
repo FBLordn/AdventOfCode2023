@@ -6,7 +6,7 @@
 
 
 void DayTwo::part1(){
-    OPEN("data.txt");
+    OPEN("data/day2.txt");
     std::string line;
     int sum = 0;
     std::string colours[] = {"red", "green", "blue"};
@@ -49,7 +49,7 @@ void DayTwo::part1(){
 }
 
 void DayTwo::part2(){
-    OPEN("data.txt");
+    OPEN("data/day2.txt");
     std::string line;
     int sum = 0;
     std::string colours[] = {"red", "green", "blue"};
