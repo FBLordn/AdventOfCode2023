@@ -24,6 +24,6 @@ int main()
     //TIMER(DayFour::part2, start, end);
     //DayFive::part1();
     //DayFive::part2();
-    DaySix::part1();
-    DaySix::part2();
+    TIMER(DaySix::part1, start, end);
+    TIMER(DaySix::part2, start, end);
 }

@@ -2,6 +2,8 @@
 #include "../inc/macros.hpp"
 
 #include <algorithm>
+#include <math.h>
+#include <cstdlib>
 
 using namespace DaySix;
 
@@ -16,12 +18,7 @@ void DaySix::part1()
     std::vector<int> records = getNumber(line);
     for(int race=0; race<times.size(); race++)
     {
-        int i = 1;
-        for(i; (times[race]-i)*i <= records[race]; i++)
-        {
-            continue;
-        }
-        sum *= (times[race] - 2*i + 1);
+        sum *= (times[race] - 2 * (std::floor((times[race]/2) - std::sqrt(std::pow(times[race]/2, 2) - records[race]))) - 1);
     }
     std::cout<<"The sum is: " << sum << std::endl;
 }
@@ -56,10 +53,6 @@ void DaySix::part2()
         line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
         values.push_back(std::stoull(line));
     }
-    unsigned long i = 1;
-    for(i; (values[0]-i)*i <= values[1]; i++)
-    {
-        continue;
-    }
-    std::cout << "The sum is: " << values[0] - 2*i + 1 << std::endl;
+    long sum = values[0] - 2 * (std::floor((values[0]/2) - std::sqrt(std::pow(values[0]/2, 2) - values[1]))) - 1;
+    std::cout << "The sum is: " << sum << std::endl;
 }
