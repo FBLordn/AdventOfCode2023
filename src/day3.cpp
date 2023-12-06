@@ -2,28 +2,25 @@
 #include "../inc/macros.hpp"
 
 #include <algorithm>
+#include <vector>
 
 using namespace DayThree;
 
 void DayThree::part1()
 {
-    std::ifstream data ("data/day3.txt");
-    if(!data.is_open()){
-        std::cout << "error";
-        return;
-    }
-    std::string input[std::count(std::istreambuf_iterator<char>(data), std::istreambuf_iterator<char>(), '\n')+3];
+    std::vector<std::string> input;
     std::string line;
     int sum = 0;
     OPEN("data/day3.txt")
-    for(int l=1; getline(file, line); l++)
+    input.push_back("");
+    while(getline(file, line))
     {
-        input[l] = "." + line + ".";
+        input.push_back("." + line + ".");
     }
     input[0] = std::string(input[1].length(),'.');
-    input[sizeof(input)/sizeof(input)-1] = std::string(input[1].length(),'.');
+    input.push_back(std::string(input[1].length(),'.'));
 
-    for(int i=1;i<(sizeof(input)/sizeof(*input)-1);i++)
+    for(int i=1;i<(input.size()-1);i++)
     {
         for(int x=1;x<input[i].length()-1;x++)
         {
@@ -41,23 +38,18 @@ void DayThree::part1()
 
 void DayThree::part2()
 {
-    std::ifstream data ("data/day3.txt");
-    if(!data.is_open()){
-        std::cout << "error";
-        return;
-    }
-    std::string input[std::count(std::istreambuf_iterator<char>(data), std::istreambuf_iterator<char>(), '\n')+3];
+    std::vector<std::string> input;
     std::string line;
     int sum = 0;
     OPEN("data/day3.txt")
-    for(int l=1; getline(file, line); l++)
+    input.push_back("");
+    while(getline(file, line))
     {
-        input[l] = "." + line + ".";
+        input.push_back("." + line + ".");
     }
     input[0] = std::string(input[1].length(),'.');
-    input[sizeof(input)/sizeof(input)-1] = std::string(input[1].length(),'.');
-
-    for(int i=1;i<(sizeof(input)/sizeof(*input)-1);i++)
+    input.push_back(std::string(input[1].length(),'.'));
+    for(int i=1;i<(input.size()-1);i++)
     {
         for(int x=1;x<input[i].length()-1;x++)
         {
