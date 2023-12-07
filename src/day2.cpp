@@ -3,7 +3,7 @@
 
 #include <string>
 #include <cmath>
-
+#include <vector>
 
 void DayTwo::part1(){
     OPEN("data/day2.txt");
@@ -52,11 +52,11 @@ void DayTwo::part2(){
     OPEN("data/day2.txt");
     std::string line;
     int sum = 0;
-    std::string colours[] = {"red", "green", "blue"};
+    std::vector<std::string> colours = {"red", "green", "blue"};
     while(getline(file, line))
     {
-        int numbers[] = {0, 0, 0};
-        for(int i=0; i<(sizeof(colours)/sizeof(*colours)); i++)
+        std::vector<int> numbers = {0, 0, 0};
+        for(int i=0; i<colours.size(); i++)
         {
             int index = -1;
             while(line.find(colours[i], index+1) != line.npos)
@@ -75,7 +75,7 @@ void DayTwo::part2(){
             }
         }
         int power = 1;
-        for(int i=0; i<(sizeof(numbers)/sizeof(*numbers));i++)
+        for(int i=0; i<numbers.size();i++)
         {
             power *= numbers[i];  
         }
