@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <numeric>
+#include <algorithm>
 #include <cmath>
 
 using namespace DaySeven;
@@ -21,21 +22,19 @@ void DaySeven::part1()
         getline(ss, line, ' ');
         current.bid = std::stoi(line);
         current.worth = getWorth1(current.cards);
-        int index = 0;
-        for(index; index<hands.size(); ++index)
-        {
-            if(hands[index].worth >= current.worth)
-            {
-                break;
-            }
-        }
-        hands.insert(hands.begin() + index, current);
+        hands.push_back(current);
     }
+    std::sort(hands.begin(), hands.end(), compareLength);
     for(int i=0; i<hands.size(); i++)
     {
         sum += hands[i].bid * (i+1);
     }
     //std::cout << "The sum is: " << sum << std::endl;
+}
+
+bool DaySeven::compareLength(const hand& a, const hand& b)
+{
+    return a.worth < b.worth;
 }
 
 unsigned long DaySeven::getWorth1(std::string cards)
@@ -46,6 +45,7 @@ unsigned long DaySeven::getWorth1(std::string cards)
     char c;
     for(int i=0; i<cards.size(); i++)
     {
+        int temp;
         c = cards[i];
         if(isdigit(c))
         {
@@ -118,16 +118,9 @@ void DaySeven::part2()
         getline(ss, line, ' ');
         current.bid = std::stoi(line);
         current.worth = getWorth2(current.cards);
-        int index = 0;
-        for(index; index<hands.size(); ++index)
-        {
-            if(hands[index].worth >= current.worth)
-            {
-                break;
-            }
-        }
-        hands.insert(hands.begin() + index, current);
+        hands.push_back(current);
     }
+    std::sort(hands.begin(), hands.end(), compareLength);
     for(int i=0; i<hands.size(); i++)
     {
         sum += hands[i].bid * (i+1);

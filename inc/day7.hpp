@@ -18,6 +18,7 @@ namespace DaySeven
     
     void part1();
     void part2();
+    bool compareLength(const hand& a, const hand& b);
     unsigned long getWorth1(std::string cards);    
     unsigned long getWorth2(std::string cards);    
 }
