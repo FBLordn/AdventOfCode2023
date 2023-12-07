@@ -12,7 +12,7 @@ int main()
     std::chrono::time_point<std::chrono::high_resolution_clock> start;
     std::chrono::time_point<std::chrono::high_resolution_clock> end;
     long long int time = 0;
-    int count = 1000;
+    int count = 5000;
     //std::cout << "Day 1: " << std::end, countl;
     //AVGTIMER(DayOne::part1);
     //AVGTIMER(DayOne::part2);

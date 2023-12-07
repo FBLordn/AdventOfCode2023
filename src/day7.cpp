@@ -42,9 +42,19 @@ unsigned long DaySeven::getWorth1(std::string cards)
 {
     unsigned long cValue = 0;
     std::vector<int> counts(13, 0);
-    for(int i=0; i<cards.size(); ++i)
+    int card = 0;
+    char c;
+    for(int i=0; i<cards.size(); i++)
     {
-        int card = conversion1[cards[i]];
+        c = cards[i];
+        if(isdigit(c))
+        {
+            card = (int)c-50;
+        }
+        else
+        {
+            card = conversion1[c];
+        }
         cValue = cValue * 100 + card;
         counts[card] = counts[card] * 2 + 1;
     }
@@ -54,15 +64,30 @@ unsigned long DaySeven::getWorth1(std::string cards)
 
 unsigned long DaySeven::getWorth2(std::string cards)
 {
+    int maxIndex = 0;
     unsigned long cValue = 0;
     std::vector<int> counts(12, 0);
     int jCount = 0;
+    int card = 0;
+    char c;
     for(int i=0; i<cards.size(); i++)
     {
-        int card = conversion2[cards[i]];
+        c = cards[i];
+        if(isdigit(c))
+        {
+            card = (int)c-48;
+        }
+        else
+        {
+            card = conversion2[c];
+        }
         cValue = cValue * 100 + card;
         if(card != 1){
             counts[card-2] = counts[card-2] * 2 + 1;
+            if(counts[card-2] > counts[maxIndex])
+            {
+                maxIndex = card-2;
+            }
         }
         else{
             jCount++;
@@ -70,14 +95,6 @@ unsigned long DaySeven::getWorth2(std::string cards)
     }
     if(jCount > 0)
     {
-        int maxIndex = 0;
-        for(int i=0; i<counts.size(); i++)
-        {
-            if(counts[i] > counts[maxIndex])
-            {
-                maxIndex = i;
-            }
-        }
         for(jCount; jCount > 0; jCount--)
         {
             counts[maxIndex] = counts[maxIndex] * 2 + 1;
