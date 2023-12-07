@@ -10,7 +10,7 @@ using namespace DaySix;
 void DaySix::part1()
 {
     int sum = 1;
-    OPEN("data/day6.txt");
+    OPEN("test.txt");
     std::string line;
     getline(file, line);
     std::vector<int> times = getNumber(line);
@@ -18,26 +18,28 @@ void DaySix::part1()
     std::vector<int> records = getNumber(line);
     for(int race=0; race<times.size(); race++)
     {
-        sum *= (times[race] - 2 * (std::floor((times[race]/2) - std::sqrt(std::pow(times[race]/2, 2) - records[race]))) - 1);
+        sum *= (times[race] - 2 * (std::floor((times[race]/2.0) - std::sqrt(std::pow(times[race]/2.0, 2) - records[race]))) - 1);
     }
-    std::cout<<"The sum is: " << sum << std::endl;
+    //std::cout<<"The sum is: " << sum << std::endl;
 }
 
 std::vector<int> DaySix::getNumber(std::string line){
     std::vector<int> temp;
+    int number = 0;
     for(int i=0; i<line.size(); i++)
     {
         if(isdigit(line[i]))
         {
-            int endN = line.find(' ', i);
-            if(endN == line.npos)
-            {
-                endN = line.size();
-            }
-            temp.push_back(std::stoi(line.substr(i, endN-1)));
-            i = endN + 1;
+            number = number*10 + (int)line[i]-48;
+            continue;
         }
+        if(number != 0)
+        {
+            temp.push_back(number);
+        }
+        number = 0;
     }
+    temp.push_back(number);
     return temp;
 }
 
@@ -49,10 +51,16 @@ void DaySix::part2()
     std::vector<unsigned long long> values;
     while(getline(file, line))
     {
-        line.erase(0, line.find(':')+1);
-        line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
-        values.push_back(std::stoull(line));
+        std::string temp;
+        for(int i=0; i<line.size();i++)
+        {
+            if(isdigit(line[i]))
+            {
+                temp += line[i];
+            }
+        }
+        values.push_back(std::stoull(temp));
     }
-    long sum = values[0] - 2 * (std::floor((values[0]/2) - std::sqrt(std::pow(values[0]/2, 2) - values[1]))) - 1;
-    std::cout << "The sum is: " << sum << std::endl;
+    long sum = (values[0] - 2 * (std::floor((values[0]/2.0) - std::sqrt(std::pow(values[0]/2.0, 2) - values[1]))) - 1);
+    //std::cout << "The sum is: " << sum << std::endl;
 }

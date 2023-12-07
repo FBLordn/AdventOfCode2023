@@ -12,11 +12,13 @@
                             return;\
                         }
 
-#define TIMER(function, start, end)  start = std::chrono::high_resolution_clock::now();\
+#define AVGTIMER(function)  time = 0;\
+                        for(int i=0; i<count; i++){\
+                        start = std::chrono::high_resolution_clock::now();\
                         function();\
                         end = std::chrono::high_resolution_clock::now();\
-                        std::cout << "Time: " << std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count() << std::endl;
-
-
+                        time += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();\
+                        }\
+                        std::cout << "Time: " << time/count << std::endl;
 
 #endif 
