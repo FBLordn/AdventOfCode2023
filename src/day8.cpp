@@ -70,7 +70,6 @@ void DayEight::part2()
     std::vector<node> starts;
     OPEN("data/day8.txt")
     std::string instructions;
-    std::vector<unsigned long> mults;
     getline(file, instructions);
     getline(file, line);
     while(getline(file, line))
@@ -87,10 +86,12 @@ void DayEight::part2()
     }
     std::sort(paths.begin(), paths.end(), compareNames);
     int max = instructions.size();
+    unsigned long long number = 1;
     for(int i=0; i<starts.size(); i++)
     {
         node current = starts[i];
-        for(unsigned long x=0;; x++)
+        unsigned long x = 0;
+        for(x;; x++)
         {
             if(instructions[x%max] == 'L')
             {
@@ -102,15 +103,10 @@ void DayEight::part2()
             }
             if(current.name[2] == 'Z')
             {
-                mults.push_back(x+1);
                 break;
             }
         }
+        number = std::lcm(number, x+1);
     }
-    unsigned long long number = 1;
-    for(int i=0; i<mults.size(); i++)
-    {
-        number = std::lcm(number, mults[i]);
-    }
-    //std::cout << "The amount is: " << number << std::endl;
+    std::cout << "The amount is: " << number << std::endl;
 }
