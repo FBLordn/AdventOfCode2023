@@ -15,8 +15,6 @@ namespace DayEight
 
     void part1();
     void part2();
-    bool compareNames(const node& a, const node& b);
-    node getNode(std::vector<node> paths, std::string name);
 }
 
 #endif
