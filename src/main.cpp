@@ -6,6 +6,7 @@
 #include "../inc/day6.hpp"
 #include "../inc/day7.hpp"
 #include "../inc/day8.hpp"
+#include "../inc/day9.hpp"
 #include "../inc/macros.hpp"
 
 int main()
@@ -13,7 +14,7 @@ int main()
     std::chrono::time_point<std::chrono::high_resolution_clock> start;
     std::chrono::time_point<std::chrono::high_resolution_clock> end;
     long long int time = 0;
-    int count = 1000;
+    int count = 10000;
     //std::cout << "Day 1: " << std::end, countl;
     //AVGTIMER(DayOne::part1);
     //AVGTIMER(DayOne::part2);
@@ -38,4 +39,7 @@ int main()
     //std::cout << "Day 8: " << std::end, countl;
     //AVGTIMER(DayEight::part1);
     //AVGTIMER(DayEight::part2);
+    //std::cout << "Day 9: " << std::end, countl;
+    AVGTIMER(DayNine::part1);
+    AVGTIMER(DayNine::part2);
 }
