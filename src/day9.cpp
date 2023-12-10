@@ -6,84 +6,81 @@
 
 using namespace DayNine;
 
+
 void DayNine::part1()
 {
-    long long sum = 0;
+    long sum = 0;
     std::string line;
     OPEN("data/day9.txt")
     while(getline(file, line))
     {
-        std::vector<std::vector<long>> levels;
         std::stringstream ss(line);
-        std::string temp;
         std::vector<long> values;
-        while(getline(ss, temp, ' '))
+        while(getline(ss, line, ' '))
         {
-            values.push_back(std::stol(temp));
+            values.push_back(std::stol(line));
         }
-        levels.push_back(values);
-        for(bool allZero = false; !allZero;)
+        for(bool allZero = true;;allZero = true)
         {
-            allZero = true;
-            std::vector<long> nextStage;
-            std::vector<long> previousStage = levels.back();
-            for(int i=1; i<previousStage.size(); i++)
+            sum += values.back();
+            for(std::vector<long>::iterator i=values.begin() + 1; i != values.end(); i++)
             {
-                long change = previousStage[i] - previousStage[i-1];
-                nextStage.push_back(change);
-                if(change != 0)
+                *(i - 1) = *i - *(i - 1);
+                if(*(i - 1) != 0)
                 {
                     allZero = false;
-                }   
+                }
             }
-            levels.push_back(nextStage);
+            if(allZero)
+            {
+                break;
+            }
+            values.erase(values.end()-1);
         }
-        for(int i=levels.size()-1; i>0; i--)
-        {
-            levels[i-1].push_back(levels[i].back() + levels[i-1].back());
-        }
-        sum += levels[0].back();
     }
-    //std::cout << "The sum is: " << sum << std::endl;
+    std::cout << "The sum is: " << sum << std::endl;
 }
+
 
 void DayNine::part2()
 {
-    long long sum = 0;
+    long sum = 0;
     std::string line;
     OPEN("data/day9.txt")
     while(getline(file, line))
     {
-        std::vector<std::vector<long>> levels;
         std::stringstream ss(line);
-        std::string temp;
         std::vector<long> values;
-        while(getline(ss, temp, ' '))
+        while(getline(ss, line, ' '))
         {
-            values.push_back(std::stol(temp));
+            values.push_back(std::stol(line));
         }
-        levels.push_back(values);
-        for(bool allZero = false; !allZero;)
+        bool allZero = true;
+        for(bool adds=true;;adds = !adds)
         {
-            allZero = true;
-            std::vector<long> nextStage;
-            std::vector<long> previousStage = levels.back();
-            for(int i=1; i<previousStage.size(); i++)
+            if(adds)
             {
-                long change = previousStage[i] - previousStage[i-1];
-                nextStage.push_back(change);
-                if(change != 0)
+                sum += values.front();
+            }
+            else
+            {
+                sum -= values.front();
+            }
+            for(std::vector<long>::iterator i=values.begin() + 1; i != values.end(); i++)
+            {
+                *(i - 1) = *i - *(i - 1);
+                if(*(i - 1) != 0)
                 {
                     allZero = false;
-                }   
+                }
             }
-            levels.push_back(nextStage);
+            if(allZero)
+            {
+                break;
+            }
+            values.erase(values.end()-1);
+            allZero = true;
         }
-        for(int i=levels.size()-1; i>0; i--)
-        {
-            levels[i-1].insert(levels[i-1].begin(), levels[i-1].front() - levels[i].front());
-        }
-        sum += levels[0][0];
     }
-    //std::cout << "The sum is: " << sum << std::endl;
+    std::cout << "The sum is: " << sum << std::endl;
 }
