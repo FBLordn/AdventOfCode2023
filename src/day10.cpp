@@ -52,11 +52,11 @@ void DayTen::part2()
         lines.push_back('O' + line + 'O');
         if(!found)
         {
-            int index = line.find('S');
+            int index = lines.back().find('S');
             if(index != line.npos)
             {
                 start[0] = i;
-                start[1] = index+1;
+                start[1] = index;
                 found = true;
             }
         }
@@ -75,68 +75,27 @@ void DayTen::part2()
         pipes[std::to_string(current.next[0]) + ',' + std::to_string(current.next[1])] = current.type;
     }
     bool noChanged = false;
+    int maxL = lines[0].size()-1;
+    int maxF = lines.size()-1;
     while(!noChanged)
     {
         noChanged = true;
-        int maxL = lines[0].size()-1;
-        int maxF = lines.size()-1;
         for(int i=1; i<maxF; i++)
         {
             std::string line = lines[i];
-            bool frontOpen = true;
-            bool backOpen = true;
+            bool frontDownOpen = true;
+            bool frontUpOpen = true;
+            bool backDownOpen = true;
+            bool backUpOpen = true;
             for(int x=1; x<maxL; x++)
             {
                 if(line[x] == 'O')
                 {
-                    frontOpen = true;
+                    frontDownOpen = true;
+                    frontUpOpen = true;
                 }
                 else{
-                    if(frontOpen)
-                    {
-                        if(pipes.find(std::to_string(i) + ',' + std::to_string(x)) == pipes.end())
-                        {
-                            line[x] = 'O';
-                            noChanged = false;
-                        }
-                        else
-                        {
-                            frontOpen = false;
-                        }
-                    }
-                }
-                if(line[maxL-x] == 'O')
-                {
-                    backOpen = true;
-                }
-                else{
-                    if(backOpen)
-                    {
-                        if(pipes.find(std::to_string(i) + ',' + std::to_string(maxL-x)) == pipes.end())
-                        {
-                            line[maxL-x] = 'O';
-                            noChanged = false;
-                        }
-                        else
-                        {
-                            backOpen = false;
-                        }
-                    }
-                }
-            }
-        }
-        for(int x=1; x<maxL; x++)
-        {
-            bool frontOpen = true;
-            bool backOpen = true;
-            for(int i=1; i<maxF; i++)
-            {
-                if(lines[i][x] == 'O')
-                {
-                    frontOpen = true;
-                }
-                else{
-                    if(frontOpen)
+                    if(frontUpOpen || frontDownOpen)
                     {
                         if(pipes.find(std::to_string(i) + ',' + std::to_string(x)) == pipes.end())
                         {
@@ -145,16 +104,89 @@ void DayTen::part2()
                         }
                         else
                         {
-                            frontOpen = false;
+                            char letter = line[x];
+                            if(letter == '|' || letter == 'L' || letter == 'J')
+                            {
+                                frontUpOpen = false;
+                            }
+                            if(letter == '|' || letter == 'F' || letter == '7')
+                            {
+                                frontDownOpen = false;
+                            }
+                        }
+                    }
+                }
+                if(line[maxL-x] == 'O')
+                {
+                    backUpOpen = true;
+                    backDownOpen = true;
+                }
+                else{
+                    if(backDownOpen || backUpOpen)
+                    {
+                        if(pipes.find(std::to_string(i) + ',' + std::to_string(maxL-x)) == pipes.end())
+                        {
+                            lines[i][maxL-x] = 'O';
+                            noChanged = false;
+                        }
+                        else
+                        {
+                            char letter = line[maxL-x];
+                            if(letter == '|' || letter == 'L' || letter == 'J')
+                            {
+                                backUpOpen = false;
+                            }
+                            if(letter == '|' || letter == 'F' || letter == '7')
+                            {
+                                backDownOpen = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for(int x=1; x<maxL; x++)
+        {
+            bool frontLOpen = true;
+            bool frontROpen = true;
+            bool backLOpen = true;
+            bool backROpen = true;
+            for(int i=1; i<maxF; i++)
+            {
+                if(lines[i][x] == 'O')
+                {
+                    frontLOpen = true;
+                    frontROpen = true;
+                }
+                else{
+                    if(frontLOpen || frontROpen)
+                    {
+                        if(pipes.find(std::to_string(i) + ',' + std::to_string(x)) == pipes.end())
+                        {
+                            lines[i][x] = 'O';
+                            noChanged = false;
+                        }
+                        else
+                        {
+                            char letter = lines[i][x];
+                            if(letter == '-' || letter == '7' || letter == 'J')
+                            {
+                                frontLOpen = false;
+                            }
+                            if(letter == '-' || letter == 'F' || letter == 'L')
+                            {
+                                frontROpen = false;
+                            }
                         }
                     }
                 }
                 if(lines[maxF-i][x] == 'O')
                 {
-                    backOpen = true;
+                    backLOpen = true;
+                    backROpen = true;
                 }
                 else{
-                    if(backOpen)
+                    if(backLOpen || backROpen)
                     {
                         if(pipes.find(std::to_string(maxF-i) + ',' + std::to_string(x)) == pipes.end())
                         {
@@ -163,7 +195,15 @@ void DayTen::part2()
                         }
                         else
                         {
-                            backOpen = false;
+                            char letter = lines[maxF-i][x];
+                            if(letter == '-' || letter == '7' || letter == 'J')
+                            {
+                                backLOpen = false;
+                            }
+                            if(letter == '-' || letter == 'F' || letter == 'L')
+                            {
+                                backROpen = false;
+                            }
                         }
                     }
                 }
@@ -171,10 +211,10 @@ void DayTen::part2()
         }
     }
     int sum = 0;
-    for(int i=1; i<lines.size()-1; i++)
+    for(int i=1; i<maxF; i++)
     {
         std::string line = lines[i];
-        for(int x=1; x<line.size()-1; x++)
+        for(int x=1; x<maxL; x++)
         {
             if(line[x] != 'O')
             {
