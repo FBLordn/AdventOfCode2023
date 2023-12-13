@@ -31,7 +31,7 @@ void DayTen::part1()
     lines[0] = std::string(lines[1].size(), '.');
     lines.push_back(lines.front());
     int ways = 2;
-    pipe current = std::get<0>(getSecond(start[0], start[1], lines));
+    pipe current = getFirst(start[0], start[1], lines);
     for(ways; current.type!='S'; ways++)
     {
         current = getPipe(current.next[0], current.next[1], current.origin, lines);
@@ -42,7 +42,7 @@ void DayTen::part1()
 void DayTen::part2()
 {
     std::string line;
-    OPEN("test.txt");
+    OPEN("data/day10.txt");
     std::vector<std::string> lines;
     int start[2];
     bool found = false;
@@ -64,15 +64,11 @@ void DayTen::part2()
     lines[0] = std::string(lines[1].size(), 'O');
     lines.push_back(lines.front());
     std::map<std::string, char> pipes;
-    pipes[std::to_string(start[0]) + ',' + std::to_string(start[1])] = 'S';
-    std::tuple<pipe, std::string> second = getSecond(start[0], start[1], lines);
-    pipe current = std::get<0>(second);
-    pipes[std::get<1>(second)] = current.type;
-    char direction = current.origin;
-    for(; current.type!='S';)
+    pipe current = getFirst(start[0], start[1], lines);
+    while(current.type != 'S')
     {
-        current = getPipe(current.next[0], current.next[1], current.origin, lines);
         pipes[std::to_string(current.next[0]) + ',' + std::to_string(current.next[1])] = current.type;
+        current = getPipe(current.next[0], current.next[1], current.origin, lines);
     }
     bool noChanged = false;
     int maxL = lines[0].size()-1;
@@ -210,7 +206,7 @@ void DayTen::part2()
             }
         }
     }
-    int sum = 0;
+    unsigned int sum = 0;
     for(int i=1; i<maxF; i++)
     {
         std::string line = lines[i];
@@ -223,6 +219,7 @@ void DayTen::part2()
         }
     }
     sum -= pipes.size();
+    std::cout << pipes.size() << std::endl;
     std::cout << "The sum is: " << sum << std::endl;
 }
 
@@ -317,27 +314,49 @@ pipe DayTen::getPipe(int y, int x, char origin, std::vector<std::string> lines)
             }
             break;
     }
-    temp.type = lines[temp.next[0]][temp.next[1]];
+    temp.type = lines[y][x];
     return temp;
 }
 
-std::tuple<pipe, std::string> DayTen::getSecond(int y, int x, std::vector<std::string> lines)
+pipe DayTen::getFirst(int y, int x, std::vector<std::string> lines)
 {
+    pipe temp;
     char next = lines[y-1][x];
-    std::tuple<pipe, std::string> value;
     if(next == '|' || next == '7' || next == 'F')
     {
-        return {getPipe(y-1, x, 's', lines), std::to_string(y-1) + ',' + std::to_string(x)};
+        temp.next[0] = y-1;
+        temp.next[1] = x;
+        temp.origin = 's';
+        temp.type = '|';
     }
-    next = lines[y+1][x];
-    if(next == '|' || next == 'L' || next == 'J')
+    else
     {
-        return {getPipe(y+1, x, 'n', lines), std::to_string(y+1) + ',' + std::to_string(x)};
+        next = lines[y+1][x];
+        if(next == '|' || next == 'L' || next == 'J')
+        {
+            temp.next[0] = y+1;
+            temp.next[1] = x;
+            temp.origin = 'n';
+            temp.type = '|';
+        }
+        else
+        {
+            next = lines[y][x-1];
+            if(next == '-' || next == 'L' || next == 'F')
+            {
+                temp.next[0] = y;
+                temp.next[1] = x-1;
+                temp.origin = 'e';
+                temp.type = '-';
+            }
+            else
+            {
+                temp.next[0] = y;
+                temp.next[1] = x+1;
+                temp.origin = 'w';
+                temp.type = '-';
+            }
+        }
     }
-    next = lines[y][x-1];
-    if(next == '-' || next == 'L' || next == 'F')
-    {
-        return {getPipe(y, x-1, 'e', lines), std::to_string(y) + ',' + std::to_string(x-1)};
-    }
-    return {getPipe(y, x+1, 'w', lines), std::to_string(y) + ',' + std::to_string(x+1)};   
+    return temp;
 }

@@ -1,2 +1,2 @@
 main: $(wildcard src/*.cpp)
-	g++ -g $(wildcard src/*.cpp) -o main.out
+	g++ -O3 $(wildcard src/*.cpp) -o main.out

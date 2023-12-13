@@ -24,7 +24,7 @@ namespace DayTen
     void part1();
     void part2();
     pipe getPipe(int y, int x, char direction, std::vector<std::string> lines);
-    std::tuple<pipe, std::string> getSecond(int y, int x, std::vector<std::string> lines);
+    pipe getFirst(int y, int x, std::vector<std::string> lines);
 }
 
 #endif
