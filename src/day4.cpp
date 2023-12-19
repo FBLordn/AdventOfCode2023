@@ -1,7 +1,6 @@
 #include "../inc/day4.hpp"
 #include "../inc/macros.hpp"
 
-#include <queue>
 #include <algorithm>
 
 using namespace DayFour;

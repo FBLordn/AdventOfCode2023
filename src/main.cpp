@@ -11,16 +11,17 @@
 #include "../inc/day11.hpp"
 #include "../inc/day12.hpp"
 #include "../inc/day13.hpp"
+#include "../inc/day14.hpp"
+#include "../inc/day15.hpp"
+#include "../inc/day16.hpp"
 #include "../inc/macros.hpp"
-
-#include <string>
 
 int main()
 {
     std::chrono::time_point<std::chrono::high_resolution_clock> start;
     std::chrono::time_point<std::chrono::high_resolution_clock> end;
     long long int time = 0;
-    int count = 100000;
+    int count = 1;
     //std::cout << "Day 1: " << std::end;
     //AVGTIMER(DayOne::part1);
     //AVGTIMER(DayOne::part2);
@@ -50,13 +51,23 @@ int main()
     //AVGTIMER(DayNine::part2);
     //std::cout << "Day 10: " << std::end;
     //AVGTIMER(DayTen::part1);
-    //AVGTIMER(DayTen::part2);
+    //AVGTIMER(DayTen::part2);              !!TODO!!
     //std::cout << "Day 11: " << std::end;
     //AVGTIMER(DayEleven::part1);
     //AVGTIMER(DayEleven::part2);
     //std::cout << "Day 12: " << std::end;
-    
+                                        //  !!TODO!!
     //std::cout << "Day 13: " << std::end;
-    AVGTIMER(DayThirteen::part1);
-    AVGTIMER(DayThirteen::part2);
+    //AVGTIMER(DayThirteen::part1);
+    //AVGTIMER(DayThirteen::part2);
+    //std::cout << "Day 14: " << std::end;
+    //AVGTIMER(DayFourteen::part1);
+    //AVGTIMER(DayFourteen::part2);         !!TODO!!
+    //std::cout << "Day 15: " << std::end;
+    //AVGTIMER(DayFifteen::part1);
+    //AVGTIMER(DayFifteen::part2);
+    //std::cout << "Day 16: " << std::end;
+    //AVGTIMER(DaySixteen::part1);
+    //AVGTIMER(DaySixteen::part2);
+    //std::cout << "Day 17: " << std::end;
 }
